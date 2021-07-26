@@ -49,7 +49,7 @@ class Detalhes extends StatelessWidget {
   }
 
   Widget _construirTextoDetalhes(String texto) {
-    return Container(padding: EdgeInsets.all(20), child: Text(texto));
+    return Container(child: Text(texto, textAlign: TextAlign.justify));
   }
 
   AppBar _construirAppBar(String titulo) {
@@ -58,6 +58,8 @@ class Detalhes extends StatelessWidget {
 
   Widget _construirLinhaIconesDetalhes(String tempo, String rendimento) {
     return Row(
-        children: <Widget>[Icon(Icons.thumb_up, color: Colors.deepOrange)]);
+        children: <Widget>[Icon(Icons.mood, color: Colors.black),
+                        Icon(Icons.mood_bad, color: Colors.black),
+                        Icon(Icons.insert_comment, color: Colors.black)]);
   }
 }
