@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_net/modelos/post.dart';
 import 'dart:convert';
 import 'package:social_net/detalhes/detalhes.dart';
+import 'package:social_net/detalhes/comentarios.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -52,7 +53,7 @@ class HomeState extends State<Home> {
                     _construirTituloCard(post.userId),
                   ],
                 ),
-                new Column(children: <Widget>[_construirReactions()]),
+                new Column(children: <Widget>[_construirReactions(post)]),
               ],
             )));
   }
@@ -85,7 +86,7 @@ class HomeState extends State<Home> {
             Text(titulo, style: TextStyle(color: Colors.white, fontSize: 20)));
   }
 
-  Widget _construirReactions() {
+  Widget _construirReactions(post) {
     return Row(children: <Widget>[
       IconButton(
         icon: const Icon(Icons.mood),
@@ -100,7 +101,10 @@ class HomeState extends State<Home> {
       IconButton(
         icon: const Icon(Icons.insert_comment),
         tooltip: 'icon insert comment',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Comentarios(post: post)));
+        },
       ),
     ]);
   }

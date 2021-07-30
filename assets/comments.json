@@ -1,0 +1,34 @@
+
+    [
+        {
+            "id": "10",
+            "userId": "jaime.com",
+            "postId": "10",
+            "text": "Caramelo gente boa"
+        },
+        {
+            "id": "20",
+            "userId": "fred.com",
+            "postId": "10",
+            "text": "que lindo"
+        },
+        {
+            "id": "30",
+            "userId": "fred.com",
+            "postId": "10",
+            "text": "qual o nome dele?"
+        },
+        {
+            "id": "40",
+            "userId": "raul.com",
+            "postId": "20",
+            "text": "olá amigo"
+        },
+        {
+            "id": "50",
+            "userId": "raul.com",
+            "postId": "20",
+            "text": "seja bem vindo!!!"
+        }
+    ]
+
