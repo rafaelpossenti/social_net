@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:social_net/modelos/receita.dart';
+import 'package:social_net/modelos/post.dart';
 
 class Detalhes extends StatelessWidget {
-  final Receita? receita;
+  final Post? post;
 
-  Detalhes({Key? key, @required this.receita}) : super(key: key);
+  Detalhes({Key? key, @required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class Detalhes extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          _construirImagemDetalhes(receita!.foto!),
+          // _construirImagemDetalhes(post!.text!),
           // _construirTituloDetalhes(receita!.titulo!),
 
-          _construirLinhaIconesDetalhes(
-              receita!.tempoPreparo!, '${receita!.porcoes!} porções'),
+          // _construirLinhaIconesDetalhes(
+          //     receita!.tempoPreparo!, '${receita!.porcoes!} porções'),
 
-          _construirTextoDetalhes(receita!.ingredientes!),
+          // _construirTextoDetalhes(receita!.ingredientes!),
 
           // _construirSubtitulosDetalhes('Ingredientes'),
 
@@ -57,9 +57,10 @@ class Detalhes extends StatelessWidget {
   }
 
   Widget _construirLinhaIconesDetalhes(String tempo, String rendimento) {
-    return Row(
-        children: <Widget>[Icon(Icons.mood, color: Colors.black),
-                        Icon(Icons.mood_bad, color: Colors.black),
-                        Icon(Icons.insert_comment, color: Colors.black)]);
+    return Row(children: <Widget>[
+      Icon(Icons.mood, color: Colors.black),
+      Icon(Icons.mood_bad, color: Colors.black),
+      Icon(Icons.insert_comment, color: Colors.black)
+    ]);
   }
 }
