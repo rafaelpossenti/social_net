@@ -3,6 +3,7 @@ import 'package:social_net/modelos/post.dart';
 import 'dart:convert';
 import 'package:social_net/detalhes/detalhes.dart';
 import 'package:social_net/detalhes/comentarios.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -18,11 +19,10 @@ class HomeState extends State<Home> {
   Widget _construirHome() {
     return Scaffold(
         body: SizedBox(
-            child: FutureBuilder(
-          future:
-              DefaultAssetBundle.of(context).loadString('assets/posts.json'),
+            child: FutureBuilder<List>(
+          future: getDataPost(),
           builder: (context, snapshot) {
-            List<dynamic> posts = json.decode(snapshot.data.toString());
+            List<dynamic> posts = snapshot.data!;
 
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -34,6 +34,17 @@ class HomeState extends State<Home> {
           },
         )),
         appBar: _construirAppBar('Rede Social'));
+  }
+
+  Future<List<dynamic>> getDataPost() async {
+    final response = await http.get('http://localhost:8081/posts');
+    if (response.statusCode == 200) {
+      List<dynamic> lista = json.decode(response.body)['content'];
+      print(lista);
+      return lista;
+    } else {
+      throw Exception('Falha ao carregar dados...');
+    }
   }
 
   Widget _construirCard(post) {
