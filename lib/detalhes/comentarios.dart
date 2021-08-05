@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_net/modelos/post.dart';
 import 'package:social_net/modelos/comment.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Comentarios extends StatelessWidget {
   final Post? post;
@@ -16,16 +17,17 @@ class Comentarios extends StatelessWidget {
   Widget _construirDetalhes(context) {
     return Scaffold(
         body: SizedBox(
-            child: FutureBuilder(
-          future:
-              DefaultAssetBundle.of(context).loadString('assets/comments.json'),
+            child: FutureBuilder<List>(
+          future: getDataComment(),
+          // DefaultAssetBundle.of(context).loadString('assets/comments.json'),
           builder: (context, snapshot) {
             TextField(
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Enter to insert a new comment'),
             );
-            List<dynamic> comments = json.decode(snapshot.data.toString());
+
+            List<dynamic> comments = snapshot.data!;
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 Comment comment = Comment.fromJson(comments[index]);
@@ -36,6 +38,18 @@ class Comentarios extends StatelessWidget {
           },
         )),
         appBar: _construirAppBar('Comentarios'));
+  }
+
+  Future<List<dynamic>> getDataComment() async {
+    final response = await http
+        .get('http://localhost:8081/comments/60f73c773900c303f076697b');
+    if (response.statusCode == 200) {
+      List<dynamic> lista = json.decode(response.body)['content'];
+      print(lista);
+      return lista;
+    } else {
+      throw Exception('Falha ao carregar dados...');
+    }
   }
 
   Widget _construirCard(comment) {
